@@ -14,7 +14,7 @@
 
 #define FILTER_WIN 			15
 #define FILTER_WIN_2		7
-short  ABuffer[3][64];   // double data buffer
+short  ABuffer[3][64];   // ring data buffer
 volatile char  process=0;      // buffer needs to be filled
 short xyz[64];
 void fixsign(void *inp)
@@ -71,7 +71,7 @@ while (1)
     	}
 
 
-} // playWAV
+} //
 
 
 
@@ -139,7 +139,7 @@ void main(void)
 		IODIR |=BIT6;  //used for debugging
 		IRQ_enable(6);
 		IRQ_globalEnable();
-		fliter();
+		fliter(); // will not exit
 		IRQ_globalDisable();
 		AIC3204_rset( 1, 1 );    // Reset codec
 		while(1){
